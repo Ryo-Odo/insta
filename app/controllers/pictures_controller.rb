@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :user_limit, only: [:edit, :update, :destroy]
   def index
     @pictures = Picture.all
   end
@@ -26,6 +27,7 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def edit
@@ -52,6 +54,12 @@ class PicturesController < ApplicationController
   private
   def picture_params
     params.require(:picture).permit(:image, :image_cache, :content, :user_id)
+  end
+
+  def user_limit
+    if current_user.id != @picture.user_id
+      redirect_to pictures_path, notice: "他人の投稿は編集・削除できません"
+    end
   end
 
   def set_blog

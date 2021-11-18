@@ -12,9 +12,12 @@
     <td><%= image_tag picture.image.url %></td>
     <td><%= picture.content %></td>
     <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
-    <td><%= link_to "編集する", edit_picture_path(picture.id) %></td>
-    <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
+    <% if current_user.id == picture.user_id%>
+      <td><%= link_to "編集する", edit_picture_path(picture.id) %></td>
+      <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
+    <% end %>
   </tr>
 <% end %>
 </table>
 <p><%= link_to '新しく写真を投稿する', new_picture_path %></p>
+<p><%= link_to 'お気に入り一覧', favorite_path(current_user.id) %></p>

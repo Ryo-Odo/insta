@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :user_limit, only: [:show, :edit, :update]
   def new
     @user = User.new
   end
@@ -33,6 +34,12 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :user_image,
     :password_confirmation)
+  end
+
+  def user_limit
+    if current_user.id != @user.id
+      redirect_to pictures_path, notice: "他人プロフィールは閲覧・編集・削除できません"
+    end
   end
 
   def set_user
