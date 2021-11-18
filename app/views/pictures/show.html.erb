@@ -1,0 +1,8 @@
+<h1>詳細画面</h1>
+<p>画像: <%= @picture.image %></p>
+<p>内容: <%= @picture.content %></p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @picture.image.url %>
+</p>
+<p><%= link_to "ブログ一覧画面にもどる", pictures_path %></p>
