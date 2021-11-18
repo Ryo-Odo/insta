@@ -12,8 +12,8 @@
     <td><%= image_tag picture.image.url %></td>
     <td><%= picture.content %></td>
     <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
-    <td><%= link_to "ブログを編集する", edit_picture_path(picture.id) %></td>
-    <td><%= link_to 'ブログを削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
+    <td><%= link_to "編集する", edit_picture_path(picture.id) %></td>
+    <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %>
   </tr>
 <% end %>
 </table>

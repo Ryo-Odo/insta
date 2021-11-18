@@ -57,4 +57,4 @@ class PicturesController < ApplicationController
   def set_blog
     @picture = Picture.find(params[:id])
   end
-  end
+end

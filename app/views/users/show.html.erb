@@ -1,3 +1,10 @@
 <h1><%= @user.name %>のページ</h1>
+<p><%= notice %></p>
+<% if @user.user_image.file.nil?%>
+  <p>画像: 画像がありません</p>
+<% else %>
+  <p>画像: <%= image_tag @user.user_image.url %></p>
+<% end %>
 <p>メールアドレス: <%= @user.email %></p>
+<p><%= link_to "編集する", edit_user_path(@user.id) %></p>
 <p><%= link_to "ブログ一覧画面", pictures_path %></p>
